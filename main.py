@@ -13,7 +13,7 @@ class DogWindow(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
 
-        url = "https://avatars.githubusercontent.com/u/171740024?v=4&size=64"
+        url = "https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg"
 
         try:
             data = urlopen(url).read()
