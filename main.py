@@ -15,7 +15,7 @@ class DogWindow(QWidget):
         layout = QVBoxLayout()
 
         # URL of the raw image file on GitHub
-        url = "https://raw.githubusercontent.com/MikeyTV10/dogsitedogdogdog/main/dog.png"
+        url = "https://avatars.githubusercontent.com/u/171740024?v=4&size=64"
 
         try:
             # Download image data
