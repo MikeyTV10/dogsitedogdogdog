@@ -1,8 +1,9 @@
 import sys
-import os
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
+from urllib.request import urlopen
+from io import BytesIO
 
 class DogWindow(QWidget):
     def __init__(self):
@@ -13,21 +14,25 @@ class DogWindow(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
 
-        # Load the image
-        image_path = os.path.join(os.path.dirname(__file__), "dog.png")
-        if not os.path.exists(image_path):
-            label = QLabel("dog.png not found.")
-            label.setAlignment(Qt.AlignCenter)
-        else:
-            pixmap = QPixmap(image_path)
+        # URL of the raw image file on GitHub
+        url = "https://raw.githubusercontent.com/MikeyTV10/dogsitedogdogdog/main/dog.png"
+
+        try:
+            # Download image data
+            data = urlopen(url).read()
+            image = QPixmap()
+            image.loadFromData(data)
+
             label = QLabel()
-            label.setPixmap(pixmap)
+            label.setPixmap(image)
+            label.setAlignment(Qt.AlignCenter)
+        except Exception as e:
+            label = QLabel(f"Failed to load image.\n{e}")
             label.setAlignment(Qt.AlignCenter)
 
         layout.addWidget(label)
         self.setLayout(layout)
-        self.resize(pixmap.width() if 'pixmap' in locals() else 300,
-                    pixmap.height() if 'pixmap' in locals() else 200)
+        self.resize(image.width(), image.height())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
