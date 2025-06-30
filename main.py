@@ -3,7 +3,6 @@ from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 from urllib.request import urlopen
-from io import BytesIO
 
 class DogWindow(QWidget):
     def __init__(self):
@@ -14,11 +13,9 @@ class DogWindow(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
 
-        # URL of the raw image file on GitHub
         url = "https://avatars.githubusercontent.com/u/171740024?v=4&size=64"
 
         try:
-            # Download image data
             data = urlopen(url).read()
             image = QPixmap()
             image.loadFromData(data)
